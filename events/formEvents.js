@@ -48,12 +48,11 @@ const formEvents = () => {
     if (e.target.id.includes('submit-author')) {
       console.warn('CLICKED SUBMIT AUTHOR');
       const payload = {
-        email: document.querySelector('#email').value,
-        favorite: document.querySelector('#favorite').value,
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
+        email: document.querySelector('#email').value,
       };
-      // console.warn(payload);
+      console.warn(payload);
       createAuthor(payload).then(({ name }) => {
         const patchPayLoad = { firebaseKey: name };
         updateAuthor(patchPayLoad).then(() => {

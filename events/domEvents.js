@@ -2,6 +2,10 @@ import { deleteBook, getBooks, getSingleBook } from '../api/bookData';
 import addBookForm from '../components/forms/addBookForm';
 import { showBooks } from '../pages/books';
 import addAuthorForm from '../components/forms/addAuthorForm';
+import { deleteSingleAuthor, getAuthors } from '../api/authorData';
+import { showAuthors } from '../pages/authors';
+import getBookDetails from '../api/mergedData';
+import viewBook from '../pages/viewBook';
 
 const domEvents = () => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -35,6 +39,8 @@ const domEvents = () => {
     if (e.target.id.includes('view-book-btn')) {
       console.warn('VIEW BOOK', e.target.id);
       console.warn(e.target.id.split('--'));
+      const [, firebaseKey] = e.target.id.split('--');
+      getBookDetails(firebaseKey).then(viewBook);
     }
 
     // FIXME: ADD CLICK EVENT FOR DELETING AN AUTHOR
@@ -43,6 +49,10 @@ const domEvents = () => {
       if (window.confirm('Want to delete?')) {
         console.warn('DELETE AUTHOR', e.target.id);
         console.warn(e.target.id.split('--'));
+        const [, firebaseKey] = e.target.id.split('--');
+        deleteSingleAuthor(firebaseKey).then(() => {
+          getAuthors().then(showAuthors);
+        });
       }
     }
 
