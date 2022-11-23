@@ -1,4 +1,4 @@
-import { getSingleAuthor } from './authorData';
+import { getSingleAuthor, getAuthorBooks } from './authorData';
 import { getSingleBook } from './bookData';
 
 // for merged promises
@@ -9,4 +9,11 @@ const getBookDetails = (firebaseKey) => new Promise((resolve, reject) => {
   }).catch(reject);
 });
 
-export default getBookDetails;
+const getAuthorDetails = (firebaseKey) => new Promise((resolve, reject) => {
+  getSingleAuthor(firebaseKey).then((authorObject) => {
+    getAuthorBooks(firebaseKey)
+      .then((booksArray) => resolve({ ...authorObject, booksArray }));
+  }).catch(reject);
+});
+
+export { getBookDetails, getAuthorDetails };
