@@ -3,7 +3,6 @@ import renderToDOM from '../utils/renderToDom';
 
 const viewAuthor = (obj) => {
   clearDom();
-
   let domString = `
     <div class="text-white ms-5 details">
      <h5>${obj.first_name} ${obj.last_name} ${obj.favorite ? '<span class="badge bg-danger"><i class="fa fa-heart" aria-hidden="true"></i></span>' : ''}</h5>
@@ -14,7 +13,7 @@ const viewAuthor = (obj) => {
      </div>
     `;
 
-  obj.bookObject.forEach((book) => {
+  obj.booksArray.forEach((book) => {
     domString += `
   <div class="mt-5 d-flex flex-wrap">
     <div class="d-flex flex-column">

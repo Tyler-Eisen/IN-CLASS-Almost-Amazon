@@ -19,7 +19,7 @@ const navigationEvents = () => {
   // TODO: ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
     console.warn('CLICKED ALL BOOKS');
-    getBooks().then(showBooks);
+    getBooks(user.uid).then(showBooks);
   });
 
   // FIXME: STUDENTS Create an event listener for the Authors

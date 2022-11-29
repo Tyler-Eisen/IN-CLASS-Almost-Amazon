@@ -18,7 +18,7 @@ const domEvents = () => {
         console.warn(e.target.id.split('--'));
         const [, firebaseKey] = e.target.id.split('--');
         deleteBook(firebaseKey).then(() => {
-          getBooks().then(showBooks);
+          getBooks(user.uid).then(showBooks);
         });
       }
     }
@@ -52,7 +52,7 @@ const domEvents = () => {
         console.warn(e.target.id.split('--'));
         const [, firebaseKey] = e.target.id.split('--');
         deleteSingleAuthor(firebaseKey).then(() => {
-          getAuthors().then(showAuthors);
+          getAuthors(user.uid).then(showAuthors);
         });
       }
     }
@@ -65,7 +65,8 @@ const domEvents = () => {
     // ADD CLICK EVENT FOR VIEWING AUTHOR DETAILS
     if (e.target.id.includes('view-author-btn')) {
       console.warn(getAuthorDetails);
-      getAuthorDetails().then(viewAuthor);
+      const [, firebaseKey] = e.target.id.split('--');
+      getAuthorDetails(firebaseKey).then(viewAuthor);
     }
     // FIXME: ADD CLICK EVENT FOR EDITING AN AUTHOR
   });
